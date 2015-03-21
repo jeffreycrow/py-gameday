@@ -92,11 +92,10 @@ if __name__ == '__main__':
                      metavar='YYYY',
                      help="Required. 4 digit year.",)
     # optional arg's
-    opt.add_argument("-m","--month", default="3", type=csv,
+    opt.add_argument("-m","--month", type=csv,
                      metavar='M,M',
                      help="1-2 digit month.",)
-    opt.add_argument("-d","--day", 
-                     default="1",
+    opt.add_argument("-d","--day",
                      type=csv,
                      metavar='D,D',
                      help="1-2 digit day.",)
