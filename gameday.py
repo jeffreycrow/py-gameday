@@ -9,6 +9,12 @@ import datetime
 import MySQLdb
 from ConfigParser import ConfigParser
 
+# python 2
+import sys
+if sys.version_info.major == 2:
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
+
 def csv(value):
     ''' defines csv type for argparse add_argument() for month's & day's '''
     return map(int,value.split(','))
