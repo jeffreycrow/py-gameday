@@ -2,6 +2,7 @@ from logging import getLogger, Handler
 from urllib import urlopen
 from warnings import simplefilter
 from time import sleep
+import requests
 
 class NullHandler(Handler):
     def emit(self, record):
@@ -17,17 +18,17 @@ class Fetcher:
         for i in xrange(CONSTANTS.FETCH_TRIES):
             logger.debug('FETCH %s' % url)
             try:
-                page = urlopen(url)
+                r = requests.get(url)
             except IOError, e:
                 if i == CONSTANTS.FETCH_TRIES-1:
                     logger.error('ERROR %s (max tries %s exhausted)' % (url, CONSTANTS.FETCH_TRIES))
                 sleep(1)
                 continue
 
-            if page.getcode() == 404:
+            if r.status_code == 404:
                 return None
             else:
-                return page.read()
+                return r.text
             break
 
 logger = getLogger('gameday')
